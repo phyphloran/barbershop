@@ -10,7 +10,9 @@ public class Main {
     private static final BarberShopService shop = new BarberShopServiceImpl(CHAIRS_COUNT);
 
     public static void main(String[] args) throws InterruptedException {
-        Thread barberThread = new Thread(shop::barberWork);
+        Thread barberThread = new Thread(
+                () -> shop.barberWork()
+        );
         barberThread.start();
         for (int i = 1; i <= CLIENTS_COUNT; i++) {
             int clientId = i;

@@ -1,15 +1,23 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import services.BarberShopService;
+import services.impl.BarberShopServiceImpl;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+public class Main {
+
+    private static final int CHAIRS_COUNT = 3;
+    private static final int CLIENTS_COUNT = 15;
+    private static final int CLIENT_INTERVAL = 300;
+    private static final BarberShopService shop = new BarberShopServiceImpl(CHAIRS_COUNT);
+
+    public static void main(String[] args) throws InterruptedException {
+        Thread barberThread = new Thread(shop::barberWork);
+        barberThread.start();
+        for (int i = 1; i <= CLIENTS_COUNT; i++) {
+            int clientId = i;
+            Thread clientThread = new Thread(
+                    () -> shop.clientCome(clientId)
+            );
+            clientThread.start();
+            Thread.sleep(CLIENT_INTERVAL);
         }
     }
 }

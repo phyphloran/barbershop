@@ -1,7 +1,7 @@
 package services.impl;
 
-import services.BarberShopService;
 
+import services.BarberShopService;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -9,14 +9,17 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class BarberShopServiceImpl implements BarberShopService {
 
-    private int waitingClients = 0;
+    private int waitingClients;
 
     private final int chairs;
-    private final Lock lock = new ReentrantLock();
-    private final Condition clientArrived = lock.newCondition();
+    private final Lock lock;
+    private final Condition clientArrived;
 
     public BarberShopServiceImpl(int chairs) {
+        this.waitingClients = 0;
         this.chairs = chairs;
+        this.lock = new ReentrantLock();
+        this.clientArrived = lock.newCondition();
     }
 
     @Override

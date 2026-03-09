@@ -1,6 +1,7 @@
 import services.BarberShopService;
 import services.impl.BarberShopServiceImpl;
 
+
 public class Main {
 
     private static final int CHAIRS_COUNT = 3;

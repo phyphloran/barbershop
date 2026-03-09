@@ -67,4 +67,5 @@ public class BarberShopServiceImpl implements BarberShopService {
             Thread.currentThread().interrupt();
         }
     }
+
 }

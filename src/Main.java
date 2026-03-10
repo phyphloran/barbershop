@@ -16,10 +16,7 @@ public class Main {
         barberThread.start();
         for (int i = 1; i <= CLIENTS_COUNT; i++) {
             int clientId = i;
-            Thread clientThread = new Thread(
-                    () -> shop.clientCome(clientId)
-            );
-            clientThread.start();
+            new Thread(() -> shop.clientCome(clientId)).start();
             Thread.sleep(CLIENT_INTERVAL);
         }
     }

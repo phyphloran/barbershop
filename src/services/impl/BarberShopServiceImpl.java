@@ -27,7 +27,7 @@ public class BarberShopServiceImpl implements BarberShopService {
         lock.lock();
         try {
             if (waitingClients == chairs) {
-                System.out.println("Client " + id + " left (no free chairs)");
+                System.out.println("Client " + id + " left");
                 return;
             }
             waitingClients++;
